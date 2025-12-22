@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { TextInput, Button, Text, SegmentedButtons, Menu } from 'react-native-paper';
-import { Conta, Categoria, ContaFormData } from '@/types';
 import { CATEGORIAS } from '@/constants/categorias';
+import { Categoria, Conta } from '@/types';
 import { parseCurrencyInput } from '@/utils/formatters';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Menu, SegmentedButtons, Text, TextInput } from 'react-native-paper';
 
 interface ContaFormProps {
   initialData?: Conta;

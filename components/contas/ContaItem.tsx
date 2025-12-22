@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Card, Text, IconButton, Chip, useTheme } from 'react-native-paper';
+import { getCategoriaInfo } from '@/constants/categorias';
 import { Conta } from '@/types';
 import { formatCurrency, isDuesSoon, isOverdue } from '@/utils/formatters';
-import { getCategoriaInfo } from '@/constants/categorias';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Card, Chip, IconButton, Text, useTheme } from 'react-native-paper';
 
 interface ContaItemProps {
   conta: Conta;

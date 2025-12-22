@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Card as PaperCard, Text, useTheme } from 'react-native-paper';
 import { formatCurrency } from '@/utils/formatters';
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Card as PaperCard, Text, useTheme } from 'react-native-paper';
 
 interface TotalCardProps {
   title: string;

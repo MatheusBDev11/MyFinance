@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
 import { Conta, Resumo } from '@/types';
 import { getCurrentMonth } from '@/utils/formatters';
+import { useMemo } from 'react';
 
 export const useResumo = (contas: Conta[], totalRenda: number, mes?: string): Resumo => {
   return useMemo(() => {

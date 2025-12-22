@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, FlatList, Alert } from 'react-native';
-import { FAB, Searchbar, SegmentedButtons, Text, Chip } from 'react-native-paper';
-import { useRouter } from 'expo-router';
-import { useContas } from '@/hooks/useContas';
 import { ContaItem } from '@/components/contas/ContaItem';
-import { LoadingState } from '@/components/ui/LoadingState';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { LoadingState } from '@/components/ui/LoadingState';
+import { useContas } from '@/hooks/useContas';
 import { StatusConta } from '@/types';
-import { getCurrentMonth, formatMonth } from '@/utils/formatters';
+import { formatMonth, getCurrentMonth } from '@/utils/formatters';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { Alert, FlatList, StyleSheet, View } from 'react-native';
+import { Chip, FAB, Searchbar, SegmentedButtons, Text } from 'react-native-paper';
 
 export default function ContasScreen() {
   const router = useRouter();

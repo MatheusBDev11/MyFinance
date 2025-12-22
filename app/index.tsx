@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
-import { Text, FAB, Button } from 'react-native-paper';
-import { useRouter } from 'expo-router';
+import { ResumoCard } from '@/components/dashboard/ResumoCard';
+import { TotalCard } from '@/components/dashboard/TotalCard';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { LoadingState } from '@/components/ui/LoadingState';
 import { useContas } from '@/hooks/useContas';
 import { useRenda } from '@/hooks/useRenda';
 import { useResumo } from '@/hooks/useResumo';
-import { ResumoCard } from '@/components/dashboard/ResumoCard';
-import { TotalCard } from '@/components/dashboard/TotalCard';
-import { LoadingState } from '@/components/ui/LoadingState';
-import { EmptyState } from '@/components/ui/EmptyState';
 import { formatMonth, getCurrentMonth } from '@/utils/formatters';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { Button, FAB, Text } from 'react-native-paper';
 
 export default function DashboardScreen() {
   const router = useRouter();

@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Card, Text, useTheme } from 'react-native-paper';
 import { Resumo } from '@/types';
 import { formatCurrency } from '@/utils/formatters';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Card, Text, useTheme } from 'react-native-paper';
 
 interface ResumoCardProps {
   resumo: Resumo;

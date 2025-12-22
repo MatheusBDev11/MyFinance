@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useContas } from '@/hooks/useContas';
 import { ContaForm } from '@/components/contas/ContaForm';
+import { useContas } from '@/hooks/useContas';
 import { Conta } from '@/types';
-import { getCurrentMonth } from '@/utils/formatters';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 export default function ModalScreen() {
   const router = useRouter();
