@@ -57,16 +57,7 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={theme}>
       <Stack>
-        <Stack.Screen name="index" options={{ title: 'Dashboard' }} />
-        <Stack.Screen name="contas" options={{ title: 'Contas' }} />
-        <Stack.Screen name="renda" options={{ title: 'Renda Mensal' }} />
-        <Stack.Screen 
-          name="modal" 
-          options={{ 
-            presentation: 'modal', 
-            title: 'Adicionar/Editar Conta' 
-          }} 
-        />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="auto" />
     </PaperProvider>

@@ -2,8 +2,8 @@ import { getCategoriaInfo } from '@/constants/categorias';
 import { Conta } from '@/types';
 import { formatCurrency, isDuesSoon, isOverdue } from '@/utils/formatters';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Card, Chip, IconButton, Text, useTheme } from 'react-native-paper';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { IconButton, Text, useTheme } from 'react-native-paper';
 
 interface ContaItemProps {
   conta: Conta;
@@ -27,73 +27,85 @@ export const ContaItem: React.FC<ContaItemProps> = ({
 
   const getStatusColor = () => {
     if (isPaga) return '#4CAF50';
-    if (vencida) return '#F44336';
+    if (vencida) return '#E53935';
     if (venceSoon) return '#FF9800';
-    return theme.colors.onSurface;
+    return '#0D47A1';
+  };
+
+  const getBackgroundColor = () => {
+    if (isPaga) return '#F1F8F4';
+    if (vencida) return '#FFEBEE';
+    return '#FFFFFF';
   };
 
   return (
-    <Card style={styles.card} onPress={onPress} mode="elevated">
-      <Card.Content>
-        <View style={styles.header}>
-          <View style={styles.headerLeft}>
-            <View style={[styles.iconContainer, { backgroundColor: categoria.color + '20' }]}>
-              <Text style={{ fontSize: 20 }}>{categoria.icon}</Text>
-            </View>
-            <View style={styles.info}>
-              <Text variant="titleMedium" style={styles.nome}>
-                {conta.nome}
-              </Text>
-              <Text variant="bodySmall" style={styles.categoria}>
-                {categoria.label}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.actions}>
-            <IconButton
-              icon={isPaga ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'}
-              iconColor={getStatusColor()}
-              size={24}
-              onPress={onTogglePagamento}
-            />
-            <IconButton icon="delete" iconColor="#F44336" size={20} onPress={onDelete} />
-          </View>
+    <Pressable 
+      onPress={onPress}
+      onLongPress={onDelete}
+      style={[styles.card, { backgroundColor: getBackgroundColor() }]}
+    >
+      {/* Status indicator */}
+      <View style={[styles.statusBar, { backgroundColor: getStatusColor() }]} />
+      
+      {/* Header com ícone */}
+      <View style={styles.header}>
+        <View style={[styles.iconContainer, { backgroundColor: categoria.color + '15' }]}>
+          <Text style={styles.iconText}>{categoria.icon}</Text>
         </View>
+        <Pressable onPress={onTogglePagamento} hitSlop={8}>
+          <IconButton
+            icon={isPaga ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'}
+            iconColor={getStatusColor()}
+            size={20}
+            style={styles.checkButton}
+          />
+        </Pressable>
+      </View>
 
-        <View style={styles.footer}>
-          <View>
-            <Text variant="bodySmall" style={styles.label}>
-              Valor
-            </Text>
-            <Text variant="titleMedium" style={[styles.valor, { color: getStatusColor() }]}>
-              {formatCurrency(conta.valor)}
-            </Text>
-          </View>
+      {/* Nome da conta */}
+      <Text variant="titleMedium" style={styles.nome} numberOfLines={1}>
+        {conta.nome}
+      </Text>
+      
+      {/* Valor */}
+      <Text variant="headlineSmall" style={[styles.valor, { color: getStatusColor() }]}>
+        {formatCurrency(conta.valor)}
+      </Text>
 
-          <View>
-            <Text variant="bodySmall" style={styles.label}>
-              Vencimento
-            </Text>
-            <Text variant="bodyMedium">Dia {conta.vencimento}</Text>
-          </View>
-
-          <Chip
-            mode="flat"
-            style={[styles.chip, { backgroundColor: getStatusColor() + '20' }]}
-            textStyle={{ color: getStatusColor(), fontSize: 12 }}
-          >
-            {isPaga ? 'Paga' : vencida ? 'Vencida' : venceSoon ? 'Vence em breve' : 'Pendente'}
-          </Chip>
-        </View>
-      </Card.Content>
-    </Card>
+      {/* Footer com vencimento */}
+      <View style={styles.footer}>
+        <Text variant="bodySmall" style={styles.vencimento}>
+          Dia {conta.vencimento}
+        </Text>
+        <Text variant="labelSmall" style={[styles.status, { color: getStatusColor() }]}>
+          {isPaga ? '✓ Paga' : vencida ? '! Vencida' : venceSoon ? '⚠ Vence em breve' : 'Pendente'}
+        </Text>
+      </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    marginHorizontal: 16,
-    marginVertical: 6,
+    borderRadius: 16,
+    padding: 16,
+    margin: 6,
+    minHeight: 160,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
+    position: 'relative',
+  },
+  statusBar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 4,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   header: {
     flexDirection: 'row',
@@ -101,48 +113,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
   },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
   iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 48,
+    height: 48,
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 12,
   },
-  info: {
-    flex: 1,
+  iconText: {
+    fontSize: 24,
+  },
+  checkButton: {
+    margin: 0,
   },
   nome: {
     fontWeight: '600',
-  },
-  categoria: {
-    opacity: 0.6,
-  },
-  actions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 8,
-    borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
-  },
-  label: {
-    opacity: 0.6,
-    marginBottom: 2,
+    marginBottom: 8,
+    color: '#1A1C1E',
   },
   valor: {
     fontWeight: 'bold',
+    marginBottom: 12,
   },
-  chip: {
-    height: 28,
+  footer: {
+    marginTop: 'auto',
+  },
+  vencimento: {
+    opacity: 0.6,
+    marginBottom: 4,
+  },
+  status: {
+    fontSize: 11,
+    fontWeight: '600',
+    textTransform: 'uppercase',
   },
 });

@@ -109,16 +109,19 @@ export default function ContasScreen() {
         <FlatList
           data={contasOrdenadas}
           keyExtractor={(item) => item.id}
+          numColumns={2}
           renderItem={({ item }) => (
-            <ContaItem
-              conta={item}
-              onPress={() => {
-                // TODO: Navigate to edit
-                router.push('/modal');
-              }}
-              onTogglePagamento={() => handleTogglePagamento(item.id, item.status)}
-              onDelete={() => handleDelete(item.id, item.nome)}
-            />
+            <View style={styles.gridItem}>
+              <ContaItem
+                conta={item}
+                onPress={() => {
+                  // TODO: Navigate to edit
+                  router.push('/modal');
+                }}
+                onTogglePagamento={() => handleTogglePagamento(item.id, item.status)}
+                onDelete={() => handleDelete(item.id, item.nome)}
+              />
+            </View>
           )}
           contentContainerStyle={styles.list}
         />
@@ -165,6 +168,11 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingBottom: 80,
+    paddingHorizontal: 10,
+  },
+  gridItem: {
+    flex: 1,
+    maxWidth: '50%',
   },
   fab: {
     position: 'absolute',
