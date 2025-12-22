@@ -1,29 +1,39 @@
-import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
-
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { useContas } from '@/hooks/useContas';
+import { ContaForm } from '@/components/contas/ContaForm';
+import { Conta } from '@/types';
+import { getCurrentMonth } from '@/utils/formatters';
 
 export default function ModalScreen() {
+  const router = useRouter();
+  const { addConta } = useContas();
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSubmit = async (data: Omit<Conta, 'id' | 'createdAt' | 'updatedAt'>) => {
+    try {
+      setIsSaving(true);
+      await addConta(data);
+      router.back();
+    } catch (error) {
+      console.error('Erro ao salvar conta:', error);
+      alert('Erro ao salvar conta');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a modal</ThemedText>
-      <Link href="/" dismissTo style={styles.link}>
-        <ThemedText type="link">Go to home screen</ThemedText>
-      </Link>
-    </ThemedView>
+    <View style={styles.container}>
+      <ContaForm onSubmit={handleSubmit} onCancel={() => router.back()} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
+    backgroundColor: '#F5F5F5',
   },
 });
