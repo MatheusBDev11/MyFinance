@@ -72,7 +72,7 @@ export default function DashboardScreen() {
           <TotalCard
             title="Contas Pendentes"
             value={resumo.totalPendentes}
-            color="#FF9800"
+            color="#E53935"
             subtitle={`${resumo.contasPendentes} conta${resumo.contasPendentes !== 1 ? 's' : ''}`}
           />
         </View>
@@ -117,7 +117,7 @@ export default function DashboardScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F5F9FF',
   },
   header: {
     padding: 16,
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
+    color: '#0D47A1',
   },
   subtitle: {
     opacity: 0.6,
@@ -132,17 +133,18 @@ const styles = StyleSheet.create({
   alert: {
     margin: 16,
     padding: 16,
-    backgroundColor: '#FFF3CD',
-    borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: '#FF9800',
+    backgroundColor: '#E3F2FD',
+    borderRadius: 12,
+    borderLeftWidth: 5,
+    borderLeftColor: '#0D47A1',
   },
   alertText: {
     marginBottom: 12,
-    color: '#856404',
+    color: '#01579B',
+    fontWeight: '500',
   },
   alertButton: {
-    backgroundColor: '#FF9800',
+    backgroundColor: '#0D47A1',
   },
   totaisContainer: {
     paddingHorizontal: 8,

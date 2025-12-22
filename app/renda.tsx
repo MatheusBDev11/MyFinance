@@ -153,7 +153,7 @@ export default function RendaScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F5F9FF',
   },
   header: {
     padding: 16,
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   totalValue: {
     fontWeight: 'bold',
-    color: '#1976D2',
+    color: '#0D47A1',
   },
   actions: {
     flexDirection: 'row',
@@ -206,12 +206,13 @@ const styles = StyleSheet.create({
     margin: 16,
     marginTop: 0,
     padding: 16,
-    backgroundColor: '#FFF3CD',
-    borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: '#FF9800',
+    backgroundColor: '#E3F2FD',
+    borderRadius: 12,
+    borderLeftWidth: 5,
+    borderLeftColor: '#0D47A1',
   },
   infoText: {
-    color: '#856404',
+    color: '#01579B',
+    fontWeight: '500',
   },
 });
