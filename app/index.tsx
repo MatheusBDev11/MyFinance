@@ -1,15 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text variant="headlineLarge" style={styles.title}>
-          Hello, Matheus
-        </Text>
-      </View>
+      <Text style={styles.title}>Welcome to MyFinance</Text>
+      <Text style={styles.subtitle}>Start building your app here</Text>
     </View>
   );
 }
@@ -17,14 +13,17 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  header: {
-    padding: 24,
-    paddingTop: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
   title: {
+    fontSize: 24,
     fontWeight: 'bold',
-    color: '#000000',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
   },
 });
